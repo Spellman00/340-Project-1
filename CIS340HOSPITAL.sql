@@ -1,5 +1,6 @@
 CREATE DATABASE `cis340hospital`;
 
+/*Written by Albertson*/
 CREATE TABLE `staff` (
   `staffNumber` int NOT NULL,
   `staffName` varchar(45) NOT NULL,
@@ -64,8 +65,76 @@ CREATE TABLE `wardsrequisitions` (
   PRIMARY KEY (`number`),
   UNIQUE KEY `wardsNumber_UNIQUE` (`wardsNumber`),
   UNIQUE KEY `itemNumber_UNIQUE` (`number`),
-  CONSTRAINT `wardNumberWardRequisitions` FOREIGN KEY (`wardsNumber`) REFERENCES `wards` (`wardsNumber`)
+  CONSTRAINT `wardNumberWardRequisitions` FOREIGN KEY (`wardsNumber`) REFERENCES wards (`wardsNumber`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
+/*Written By Drew Spellman*/
+CREATE TABLE `Patients` (
+  `PatientNumber` INT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) DEFAULT NULL,
+  `PhoneNumber` VARCHAR(45) DEFAULT NULL,
+  `DateofBirth` DATE NOT NULL,
+  `Sex` VARCHAR(45) NOT NULL,
+  `MaritalStatus` VARCHAR(45) DEFAULT NULL,
+  `Dateofadmission` DATETIME NOT NULL,
+  `NextofKin` VARCHAR(45) DEFAULT NULL,
+  PRIMARY KEY (`PatientNumber`),
+  UNIQUE KEY `PatientNumber_UNIQUE` (`PatientNumber`)
+  );
 
+CREATE TABLE `Outpatients` (
+  `PatientNumber` INT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) DEFAULT NULL,
+  `PhoneNumber` VARCHAR(45) DEFAULT NULL,
+  `DateOfBirth` DATE NOT NULL,
+  `Sex` VARCHAR(45) NOT NULL,
+  `AppointmentDateAndTime` DATETIME NOT NULL,
+  FOREIGN KEY (`PatientNumber`) REFERENCES Patients (`PatientNumber`)
+);
+
+CREATE TABLE `Inpatients` (
+  `PatientNumber` INT NOT NULL,
+  `FirstName` VARCHAR(45) NOT NULL,
+  `LastName` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) DEFAULT NULL,
+  `PhoneNumber` VARCHAR(45) DEFAULT NULL,
+  `DateOfBirth` DATE NOT NULL,
+  `Sex` VARCHAR(45) NOT NULL,
+  `MaritalStatus` VARCHAR(45) DEFAULT NULL,
+  `NextOfKin` VARCHAR(45) DEFAULT NULL,
+  `DateOnWaitingList` DATETIME NOT NULL,
+  `WardRequired` INT NOT NULL,
+  `DurationOfStay` INT NOT NULL,
+  `DatePlacedInWard` DATETIME NOT NULL,
+  `DateOfExpectedLeave` DATETIME NOT NULL,
+  `ActualDateOfLeave` DATETIME NOT NULL,
+  `BedNumber` INT NOT NULL,
+  FOREIGN KEY (`PatientNumber`) REFERENCES Patients (`PatientNumber`)
+);
+
+CREATE TABLE `NextofKin` (
+  `PatientNumber` INT NOT NULL,
+  `FullName` VARCHAR(45) NOT NULL,
+  `Relationship` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) DEFAULT NULL,
+  `PhoneNumber` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`FullName`),
+  FOREIGN KEY (`PatientNumber`) REFERENCES Patients (`PatientNumber`)
+);
+
+CREATE TABLE `PatientMedication` (
+  `PatientNumber` INT NOT NULL,
+  `PatientName` VARCHAR(45) NOT NULL,
+  `DrugNumber` INT NOT NULL,
+  `DrugName` VARCHAR(45) NOT NULL,
+  `UnitsPerDay` INT NOT NULL,
+  `MethodOfAdministration` VARCHAR(45) NOT NULL,
+  `StartDate` DATE NOT NULL,
+  `EndDate` DATE NOT NULL,
+  FOREIGN KEY (`PatientNumber`) REFERENCES Patients (`PatientNumber`)
+);
 
