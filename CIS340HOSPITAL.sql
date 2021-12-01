@@ -183,6 +183,6 @@ CREATE TABLE `Local Doctors` (
   `FullName` VARCHAR(45) NOT NULL,
   `ClinicNumber` INT NOT NULL,
   `ClinicAddress` VARCHAR(45) NOT NULL,
-  `ClinicPhoneNumber` VARCHAR(45) NOT NULL,
+  `ClinicPhoneNumber` VARCHAR(45) NOT NULL
 );
 
