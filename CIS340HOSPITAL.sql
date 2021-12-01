@@ -138,3 +138,51 @@ CREATE TABLE `PatientMedication` (
   FOREIGN KEY (`PatientNumber`) REFERENCES Patients (`PatientNumber`)
 );
 
+/*Written By Amin Mohammed*/
+CREATE TABLE `Surgical and NonSurgical Supplies` (
+  `ItemNumber` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `ItemDescription` VARCHAR(45) NOT NULL,
+  `QuantityinStock` INT NOT NULL,
+  `ReorderLevel` VARCHAR(45) NOT NULL,
+  `CostperLimit` DOUBLE NOT NULL,
+  PRIMARY KEY (`ItemNumber`),
+  UNIQUE KEY `ItemNumber_UNIQUE` (`ItemNumber`)
+);
+CREATE TABLE `Supplies` (
+  `Number` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Address` VARCHAR(45) DEFAULT NULL,
+  `PhoneNumber` VARCHAR(45) DEFAULT NULL,
+  `FaxNumber` INT NOT NULL,
+  PRIMARY KEY (`Number`),
+  UNIQUE KEY `Number_UNIQUE` (`Number`)
+);
+CREATE TABLE `Pharmaceutical Supplies` (
+  `DrugNumber` INT NOT NULL,
+  `Name` VARCHAR(45) NOT NULL,
+  `Description` VARCHAR(45) NOT NULL,
+  `MethodofAdministration` VARCHAR(45) NOT NULL,
+  `Dosage` VARCHAR(45) NOT NULL,
+  `Quantitiyinstock` INT NOT NULL,
+  `ReorderLevel` VARCHAR(45) NOT NULL,
+  `CostperUnit`DOUBLE NOT NULL,
+  PRIMARY KEY (`DrugNumber`),
+  UNIQUE KEY `DrugNumber_UNIQUE` (`DrugNumber`)
+);
+CREATE TABLE `Patient Appointments` (
+  `AppointmentNumber` INT NOT NULL,
+  `PatientName` VARCHAR(45) NOT NULL,
+  `StaffName` VARCHAR(45) NOT NULL,
+  `DateandTime` DATETIME NOT NULL,
+  `Examination Room` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`AppointmentNumber`),
+  UNIQUE KEY `AppointmentNumber_UNIQUE` (`AppointmentNumber`)
+);
+CREATE TABLE `Local Doctors` (
+  `FullName` VARCHAR(45) NOT NULL,
+  `ClinicNumber` INT NOT NULL,
+  `ClinicAddress` VARCHAR(45) NOT NULL,
+  `ClinicPhoneNumber` VARCHAR(45) NOT NULL,
+);
+
