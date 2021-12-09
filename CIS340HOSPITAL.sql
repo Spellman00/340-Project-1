@@ -1,6 +1,6 @@
 CREATE DATABASE `cis340hospital`;
 
-/*Written by Albertson*/
+/*Written by Albertson Vergara*/
 CREATE TABLE `staff` (
   `staffNumber` int NOT NULL,
   `staffName` varchar(45) NOT NULL,
